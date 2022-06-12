@@ -71,20 +71,22 @@
                 let channel = Echo.channel('channel-name');
                 channel.listen('MyEvent', function(data){
 
-                    
+                   
                     // alert('Received my-event with message: ');
                     $('#data-message')
-                    $.playSound('http://example.org/sound.mp3')
-                    
+                                       
                     .append(`
                     <div class="alert alert-primary" role="alert">
-                This is a primary alert—check it out!
+                        <strong>${data.message.name}</strong> :  ${data.message.message}<br>
                 </div>
                     
-                    <strong>${data.message.name}</strong> :  ${data.message.message}<br>`);
+                    `);
 
 
                 })
+                setTimeout(function(){
+                    $('#data-message').remove();
+                    }, 6000);
             } catch (error) {
                 console.log(error);
             }
