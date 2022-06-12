@@ -22,6 +22,11 @@
             <div class="form-group">
                 <textarea id="message" class="form-control" ></textarea>
             </div>
+
+            <div class="alert alert-primary" role="alert">
+                This is a primary alert—check it out!
+              </div>
+
         <button class="btn btn-block btn-primary">Send</button>
     </div>
 </div>
@@ -55,17 +60,24 @@
                     'name' : name.val(),
                     'message' : message.val(),
                     }).then(()=>{
+                        name.val('');
                         message.val('');
                     });
                 }
 
             })
 
-            let channel = Echo.channel('channel-name');
-            channel.listen('MyEvent', function(data){
-                $('#data-message')
-                .append(`<strong>${data.message.name}</strong> :  ${data.message.message}<br>`);
-            })
+            try {
+                let channel = Echo.channel('channel-name');
+                channel.listen('MyEvent', function(data){
+                    alert('Received my-event with message: ');
+                    $('#data-message')
+                    .append(`<strong>${data.message.name}</strong> :  ${data.message.message}<br>`);
+                })
+            } catch (error) {
+                console.log(error);
+            }
+            
 
         })
     </script>
