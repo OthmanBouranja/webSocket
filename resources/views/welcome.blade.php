@@ -23,10 +23,8 @@
                 <textarea id="message" class="form-control" ></textarea>
             </div>
 
-            <div class="alert alert-primary" role="alert">
-                This is a primary alert—check it out!
-              </div>
-
+           
+            <button onclick="playSound('https://file-examples.com/storage/fea5852d3d62a659ea2668c/2017/11/file_example_MP3_700KB.mp3');">Play</button>
         <button class="btn btn-block btn-primary">Send</button>
     </div>
 </div>
@@ -38,6 +36,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="{{url('js/app.js')}}"></script>
     <script>
+
+
         $(function(){
             const Http = window.axios;
             const Echo = window.Echo;
@@ -70,9 +70,20 @@
             try {
                 let channel = Echo.channel('channel-name');
                 channel.listen('MyEvent', function(data){
-                    alert('Received my-event with message: ');
+
+                    
+                    // alert('Received my-event with message: ');
                     $('#data-message')
-                    .append(`<strong>${data.message.name}</strong> :  ${data.message.message}<br>`);
+                    $.playSound('http://example.org/sound.mp3')
+                    
+                    .append(`
+                    <div class="alert alert-primary" role="alert">
+                This is a primary alert—check it out!
+                </div>
+                    
+                    <strong>${data.message.name}</strong> :  ${data.message.message}<br>`);
+
+
                 })
             } catch (error) {
                 console.log(error);
